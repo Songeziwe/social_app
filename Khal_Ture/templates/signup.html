@@ -1,0 +1,31 @@
+{% extends './index.html' %}
+
+{% block title %}
+<title>Khal_Ture :: Sign Up</title>
+{% endblock %}
+
+{% block content %}
+  <div class="login-page d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Register</h2>
+        <form class="d-flex flex-column align-items-center" action="{% url 'Khal_Ture:handleSignUp'%}" enctype="multipart/form-data" method='post'>
+          {% csrf_token %}
+          <div class="d-flex flex-column align-items-start gx-sm">
+            <p class="mb-0">Select Profile Picture</p>
+            <input type="file" class="form-control"  name='profile_pic' />
+          </div>
+          <input type="text" placeholder="First name" name='first_name' class="form-control mt-2"/>
+          <input type="text" placeholder="Last name" name='last_name' class="form-control mt-2"/>
+          <input type="email" placeholder="E-mail" name='email' class="form-control mt-2"/>
+          <input type="password" placeholder="Password" name="password" class="form-control mt-3"/>
+          <input type="password" placeholder="Confirm password" name="confirm_password" class="form-control mt-3"/>
+          <div class="form-actions text-center py-3 px-3 mt-2">
+            <input type="submit" value="SIGN UP" class="btn btn-secondary"/>
+          </div>
+          <p class="fs-6">Already have an account? <a class="text-primary fw-bold text-decoration-none" href="{% url 'Khal_Ture:login' %}" type="button">SIGN IN</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

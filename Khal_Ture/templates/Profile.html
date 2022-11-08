@@ -1,0 +1,76 @@
+{% extends './index.html' %} {% block title %}
+<title>Khal-Ture:Profile</title>
+{% endblock %} {% block content %} {% include "./navbar.html" %}
+<div class="mx-5 py-2">
+  <div class="row">
+    <div
+      style="height: 85vh; top: 70px; left: 30px; width: 250px"
+      class="col-4 border fixed-top py-2 d-flex flex-column justify-content-between align-items-center"
+    >
+      <div class="d-flex flex-column align-items-center flex-grow-1 w-100">
+        <div class="">
+          <img
+            class="img-fluid rounded-circle thumbnail"
+            style="width: 100px; height: 100px"
+            src="{{user.profile_img.url}}"
+            alt="{{user.first_name}}"
+          />
+        </div>
+        <div class="w-100">
+          <b class="lead text-muted text-capitalize fs-4">
+            {{user.first_name}} {{user.last_name}}
+          </b>
+        </div>
+        <div class="w-100 lead text-muted fst-italic fs-6">{{user.email}}</div>
+        <div class="w-100">
+          <a href="#">Resert password</a>
+        </div>
+      </div>
+      <div class="pt-4 w-100">
+        <form
+          method="post"
+          class="w-100"
+          action='{% url "Khal_Ture:profile" %}'
+        >
+          {% csrf_token %}
+          <button class="btn w-100 btn-danger text-white">Logout</button>
+        </form>
+      </div>
+    </div>
+
+    <div style="margin-left: 270px" class="col column h-100">
+      {% for post in posts %}
+      <div class="row py-2 h-100">
+        <div class="col-6">
+          <img
+            class="img-fluid rounded"
+            src="{{post.imageUrl.url}}"
+            alt="{{post.title}}"
+          />
+        </div>
+        <div
+          class="col fit d-flex flex-column justify-content-between align-items-start"
+        >
+          <div class="flex-grow-1 column">
+            <h4 class="col">{{post.title}}</h4>
+            <div class="col lead text-muted fs-5">
+              {{post.content|truncatewords:20}}
+            </div>
+          </div>
+          {% comment %}
+          <div class="flex-shrink-1">
+            <a
+              href="{% url 'Khal_Ture:post-details' slug=post.slug %}"
+              class="form-control btn btn-info"
+              >View Post</a
+            >
+          </div>
+          {% endcomment %}
+        </div>
+      </div>
+      <hr class="border-bottom-1" />
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
